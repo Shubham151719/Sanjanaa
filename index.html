@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>For Phuttuuuuuu 💗</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: light-dark(#fff4fb,#160b16);
+      --bg2: light-dark(#ffe4f2,#241126);
+      --surface: light-dark(rgba(255,255,255,.78),rgba(43,20,42,.88));
+      --surface-strong: light-dark(#ffffff,#30172e);
+      --ink: light-dark(#4a2042,#ffe9f7);
+      --muted: light-dark(#8c637f,#d1a8c4);
+      --pink: #ff6fb5;
+      --hot: #ff3d91;
+      --peach: #ffb48f;
+      --rose: #ffc9df;
+      --lav: #d9b8ff;
+      --line: light-dark(rgba(255,90,155,.18),rgba(255,190,220,.15));
+      --shadow: 0 22px 60px rgba(116,32,91,.18);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: ui-rounded, "SF Pro Rounded", "Trebuchet MS", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    #app {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(255,255,255,.95) 0 7%, transparent 22%),
+        radial-gradient(circle at 88% 16%, rgba(255,190,228,.5) 0 7%, transparent 24%),
+        linear-gradient(145deg, var(--bg), var(--bg2));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grain {
+      position: fixed; inset: 0; pointer-events: none; opacity: .08; mix-blend-mode: multiply;
+      background-image:
+        radial-gradient(circle at 20% 20%, #fff 0 1px, transparent 1px),
+        radial-gradient(circle at 80% 70%, #fff 0 1px, transparent 1px),
+        radial-gradient(circle at 60% 40%, #000 0 1px, transparent 1px);
+      background-size: 31px 31px, 37px 37px, 43px 43px;
+    }
+
+    .floating { position: absolute; pointer-events: none; user-select: none; }
+    .heart { font-size: clamp(18px,2.5vw,34px); animation: float 7s ease-in-out infinite; opacity: .45; }
+    @keyframes float {
+      0%,100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-18px) rotate(7deg); }
+    }
+
+    .screen { min-height: 100vh; display: none; place-items: center; padding: 28px; position: relative; z-index: 2; }
+    .screen.active { display: grid; }
+
+    .shell { width: min(1040px, 100%); margin: 0 auto; }
+    .panel {
+      background: var(--surface);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topbar {
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      padding: 18px 20px 0;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px;
+      border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: .04em;
+      background: rgba(255,255,255,.55); border: 1px solid var(--line);
+    }
+
+    .hero { padding: 56px clamp(22px,5vw,70px) 70px; text-align: center; }
+    .mini { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 900; }
+    h1,h2,h3,p { margin-top: 0; }
+    h1 { font-size: clamp(36px, 7vw, 84px); line-height: .95; margin: 12px 0 18px; letter-spacing: -.04em; }
+    h2 { font-size: clamp(28px,4vw,52px); line-height: 1.02; margin: 12px 0 12px; }
+    .sub { max-width: 660px; margin: 0 auto; color: var(--muted); font-size: clamp(15px,2vw,19px); line-height: 1.65; }
+
+    .bear-stage { position: relative; height: 230px; margin: 18px auto 30px; max-width: 520px; }
+    .bear { width: 150px; height: 150px; border-radius: 48% 48% 44% 44%; position: absolute; top: 18px; }
+    .bear.left { left: 12%; background: #f7f4f2; box-shadow: inset -8px -10px 0 rgba(0,0,0,.04); }
+    .bear.right { right: 12%; background: #d7b58e; box-shadow: inset -8px -10px 0 rgba(0,0,0,.06); }
+    .ear { width: 45px; height: 45px; border-radius: 50%; position:absolute; top:-10px; background: inherit; }
+    .bear.left .ear.a { left: 12px; } .bear.left .ear.b { right: 12px; }
+    .bear.right .ear.a { left: 12px; } .bear.right .ear.b { right: 12px; }
+    .eye { position:absolute; width: 16px; height: 22px; border-radius: 50%; background:#3b2331; top: 53px; }
+    .bear .eye.l { left: 42px; } .bear .eye.r { right: 42px; }
+    .snout { position:absolute; left: 50%; top: 70px; transform: translateX(-50%); width: 40px; height: 31px; border-radius: 48%; background: rgba(255,255,255,.78); }
+    .snout:after { content: ""; position:absolute; width: 9px; height: 7px; border-radius: 50%; background:#4a2532; top: 7px; left: 16px; }
+    .blush { position:absolute; width: 27px; height: 14px; border-radius: 50%; background: rgba(255,101,163,.28); top: 80px; }
+    .bear .blush.l { left: 18px; } .bear .blush.r { right: 18px; }
+    .arm { position:absolute; width: 50px; height: 24px; border-radius: 30px; background: inherit; top: 104px; }
+    .bear.left .arm { right:-22px; transform: rotate(-28deg); }
+    .bear.right .arm { left:-22px; transform: rotate(28deg); }
+    .sparkle { position:absolute; font-size: 25px; animation: twinkle 2.3s ease-in-out infinite; }
+    .sparkle.s1 { left: 8%; top: 2px; } .sparkle.s2 { right: 7%; top: 30px; animation-delay:.4s; }
+    @keyframes twinkle { 50% { transform: scale(1.25) rotate(12deg); opacity:.6; } }
+
+    .question-card { padding: 46px clamp(22px,6vw,72px) 62px; text-align: center; }
+    .question-mark { font-size: 58px; display:inline-block; animation: bob 2.5s ease-in-out infinite; }
+    @keyframes bob { 50% { transform: translateY(-7px) rotate(3deg); } }
+    .actions { display:flex; justify-content:center; gap:16px; flex-wrap: wrap; margin-top:30px; position:relative; min-height:60px; }
+    button {
+      border:0; font: inherit; cursor:pointer; font-weight: 900; letter-spacing: .01em;
+      padding: 15px 25px; border-radius: 18px; transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+    }
+    button:hover { transform: translateY(-2px); }
+    .primary { background: linear-gradient(135deg, var(--hot), var(--pink)); color: white; box-shadow: 0 12px 30px rgba(255,61,145,.28); }
+    .secondary { background: rgba(255,255,255,.62); color: var(--ink); border: 1px solid var(--line); }
+    .no-btn { position: relative; }
+    .hint { min-height: 28px; margin-top:14px; color:var(--muted); font-size:13px; }
+
+    .choice-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:28px; }
+    .choice {
+      min-height:180px; padding:28px; border-radius:24px; background: rgba(255,255,255,.48); border: 1px solid var(--line);
+      text-align:left; position:relative; overflow:hidden;
+    }
+    .choice::after { content:""; position:absolute; inset:auto -22px -28px auto; width:130px; height:130px; border-radius:50%; background:rgba(255,111,181,.12); }
+    .choice .emoji { font-size:45px; display:block; margin-bottom:18px; }
+    .choice h3 { margin-bottom:8px; font-size:24px; }
+    .choice p { margin-bottom:18px; color:var(--muted); line-height:1.5; font-size:14px; }
+
+    .shake { animation: shake .45s ease; }
+    @keyframes shake { 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
+
+    .firework-zone { position: fixed; inset: 0; pointer-events:none; z-index:30; overflow:hidden; }
+    .burst { position:absolute; width: 12px; height:12px; border-radius:50%; animation: burst 1.25s cubic-bezier(.12,.7,.2,1) forwards; }
+    @keyframes burst {
+      0% { transform: translate(0,0) scale(.3); opacity:1; }
+      72% { opacity:1; }
+      100% { transform: translate(var(--x), var(--y)) scale(.05); opacity:0; }
+    }
+
+    .gift-zone { text-align:center; padding: 56px 24px 64px; }
+    .gift-wrap { width:230px; margin:28px auto 18px; position:relative; }
+    .gift {
+      position:relative; width:210px; height:160px; margin:0 auto; perspective:700px;
+      cursor:pointer;
+    }
+    .box { position:absolute; left:0; right:0; bottom:0; height:120px; border-radius:18px; background:linear-gradient(145deg,#ff82bb,#ff3d91); box-shadow:0 20px 40px rgba(255,61,145,.25); }
+    .ribbon-v { position:absolute; width:34px; top:0; bottom:0; left:88px; background:#ffd66e; z-index:2; }
+    .ribbon-h { position:absolute; height:28px; left:0; right:0; top:62px; background:#ffd66e; z-index:2; }
+    .lid { position:absolute; left:-8px; right:-8px; top:24px; height:48px; border-radius:18px 18px 14px 14px; background:linear-gradient(145deg,#ff9dcc,#ff559e); transform-origin: 16px 90%; z-index:4; transition: transform .8s cubic-bezier(.18,.9,.25,1); }
+    .bow { position:absolute; top:0; left:78px; z-index:7; }
+    .bow:before,.bow:after { content:""; display:block; position:absolute; width:58px; height:40px; border-radius:70% 35% 70% 35%; background:#ffd66e; }
+    .bow:before { transform:translate(-40px,2px) rotate(-21deg); } .bow:after { transform:translate(15px,2px) rotate(21deg) scaleX(-1); }
+    .gift.open .lid { transform: translate(-3px,-74px) rotate(-11deg); }
+    .gift-card { margin-top:22px; font-weight:900; color:var(--muted); }
+    .reveal { display:none; margin:30px auto 0; max-width:650px; }
+    .reveal.show { display:block; animation: rise .7s ease both; }
+    @keyframes rise { from{opacity:0;transform:translateY(20px) scale(.98)} to{opacity:1;transform:translateY(0) scale(1)} }
+
+    .confetti { position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:40; }
+    .piece { position:absolute; width:10px; height:16px; animation: fall 2.8s linear forwards; }
+    @keyframes fall { to { transform:translate3d(var(--dx),100vh,0) rotate(650deg); opacity:0; } }
+
+    .ig-wrap { width:min(100%,390px); margin:auto; }
+    .ig-card { background:light-dark(#fff,#0f0f0f); border:1px solid light-dark(#dbdbdb,#262626); padding:42px 38px 30px; text-align:center; box-shadow:0 18px 60px rgba(0,0,0,.10); }
+    .ig-brand { font-family:Georgia,serif; font-size:42px; font-weight:700; letter-spacing:-2px; color:light-dark(#262626,#fff); margin-bottom:8px; }
+    .portal-note { font-size:12px; color:#8e8e8e; margin-bottom:24px; }
+    .ig-input { display:block; box-sizing:border-box; width:100%; height:42px; margin:7px 0; padding:10px; border:1px solid light-dark(#dbdbdb,#363636); border-radius:4px; background:light-dark(#fafafa,#181818); color:light-dark(#262626,#fff); font-size:12px; outline:none; }
+    .ig-input:focus { border-color:#aaa; }
+    .ig-login { width:100%; height:34px; border:0; border-radius:7px; background:#0095f6; color:#fff; font-weight:800; margin-top:10px; cursor:pointer; }
+    .ig-or { display:flex; align-items:center; gap:16px; color:#8e8e8e; font-size:11px; font-weight:800; margin:22px 0; }
+    .ig-or:before,.ig-or:after { content:""; height:1px; background:light-dark(#dbdbdb,#363636); flex:1; }
+    .ig-facebook { color:#0095f6; font-weight:800; font-size:14px; }
+    .ig-forgot { color:#00376b; font-size:12px; margin-top:22px; }
+    .ig-signup { margin-top:12px; padding:22px; text-align:center; background:light-dark(#fff,#0f0f0f); border:1px solid light-dark(#dbdbdb,#262626); font-size:14px; color:light-dark(#262626,#fff); }
+    .ig-signup b { color:#0095f6; }
+    .portal-disclaimer { margin:14px auto 0; max-width:330px; color:var(--muted); font-size:10px; line-height:1.5; text-align:center; }
+    .access { max-width:520px; margin:auto; padding: 38px; }
+    .access .logo { font-size:72px; line-height:1; text-align:center; margin-bottom:14px; }
+    .field { display:block; margin:16px 0; text-align:left; }
+    .field span { display:block; font-size:13px; font-weight:900; color:var(--muted); margin-bottom:8px; }
+    .field input { width:100%; padding:15px 16px; border-radius:16px; border:1px solid var(--line); background:rgba(255,255,255,.6); color:var(--ink); outline:none; }
+    .field input:focus { box-shadow:0 0 0 4px rgba(255,111,181,.13); border-color:rgba(255,111,181,.45); }
+    .tiny { font-size:12px; color:var(--muted); text-align:center; line-height:1.5; margin-top:12px; }
+    .error { color:#d13673; font-weight:800; min-height:20px; font-size:13px; text-align:center; margin-top:12px; }
+
+    .footer { text-align:center; padding:0 20px 28px; color:var(--muted); font-size:12px; }
+    .back { margin-top:20px; }
+    .modal-bg { position:fixed; inset:0; background:rgba(41,14,36,.58); display:none; place-items:center; z-index:50; padding:20px; }
+    .modal-bg.show { display:grid; }
+    .modal { width:min(480px,100%); padding:34px; background:var(--surface-strong); border:1px solid var(--line); border-radius:28px; text-align:center; box-shadow:0 30px 70px rgba(0,0,0,.25); }
+
+    @media (max-width: 700px) {
+      .screen { padding: 14px; }
+      .choice-grid { grid-template-columns:1fr; }
+      .bear { transform:scale(.88); }
+      .bear.left { left:1%; } .bear.right { right:1%; }
+      .hero { padding-top:44px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="grain"></div>
+    <div class="floating heart" style="left:4%;top:14%">💗</div>
+    <div class="floating heart" style="right:5%;top:23%;animation-delay:1.1s">💕</div>
+    <div class="floating heart" style="left:8%;bottom:15%;animation-delay:2.1s">💞</div>
+    <div class="floating heart" style="right:10%;bottom:11%;animation-delay:.8s">💓</div>
+
+    <section class="screen active" id="accessScreen">
+      <div class="ig-wrap">
+        <div class="ig-card">
+          <div class="ig-brand">instagram</div>
+          <div class="portal-note">Log in to continue</div>
+          <input id="nick" class="ig-input" autocomplete="off" placeholder="Phone number, username, or email" />
+          <input id="code" class="ig-input" type="password" autocomplete="off" placeholder="Password" />
+          <button class="ig-login" id="enterBtn">Log in</button>
+          <div class="ig-or"><span>OR</span></div>
+          <div class="ig-facebook">Log in with Instagram</div>
+          <div class="ig-forgot">Forgot password?</div>
+        </div>
+        <div class="ig-signup">Don't have an account? <b>Sign up</b></div>
+        <div class="portal-disclaimer">Prank portal — anything entered here is accepted locally and is not saved or sent anywhere.</div>
+      </div>
+    </section>
+
+    <section class="screen" id="homeScreen">
+      <div class="shell">
+        <div class="panel">
+          <div class="topbar"><span class="pill">💗 BUBU × DUDU STYLE</span><span class="pill" id="littleCounter">for phuttuuuuuu</span></div>
+          <div class="hero">
+            <div class="bear-stage" aria-hidden="true">
+              <div class="sparkle s1">✦</div><div class="sparkle s2">✧</div>
+              <div class="bear left"><span class="ear a"></span><span class="ear b"></span><span class="eye l"></span><span class="eye r"></span><span class="snout"></span><span class="blush l"></span><span class="blush r"></span><span class="arm"></span></div>
+              <div class="bear right"><span class="ear a"></span><span class="ear b"></span><span class="eye l"></span><span class="eye r"></span><span class="snout"></span><span class="blush l"></span><span class="blush r"></span><span class="arm"></span></div>
+            </div>
+            <div class="mini">One extremely important question</div>
+            <h1>Do you love me,<br><span style="color:var(--hot)">Phuttuuuuuu?</span> 💕</h1>
+            <p class="sub">Choose carefully. There is a very unserious consequence hiding behind one of these buttons. 😌</p>
+            <div class="actions" id="loveActions">
+              <button class="primary" id="yesBtn">YES, OBVIOUSLY 💖</button>
+              <button class="secondary no-btn" id="noBtn">No 🙈</button>
+            </div>
+            <div class="hint" id="noHint">You can try clicking “No.” I believe in you. 😂</div>
+          </div>
+          <div class="footer">Made with suspicious amounts of pink energy ✨</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="choiceScreen">
+      <div class="shell">
+        <div class="panel question-card">
+          <div class="mini">Question #2</div>
+          <h2>Whom does Shubham<br>love the most? 🫣</h2>
+          <p class="sub" style="font-size:15px">This is a highly scientific test. Please do not disappoint the tiny bears.</p>
+          <div class="choice-grid">
+            <div class="choice">
+              <span class="emoji">🥰</span>
+              <h3>Me</h3>
+              <p>The answer that makes the tiny hearts explode.</p>
+              <button class="primary" data-choice="me">Pick me 💗</button>
+            </div>
+            <div class="choice">
+              <span class="emoji">🌧️</span>
+              <h3>Rain</h3>
+              <p>A suspiciously poetic answer. The bears are already nervous.</p>
+              <button class="secondary" data-choice="rain">Pick rain 🌧️</button>
+            </div>
+          </div>
+          <div class="footer back"><button class="secondary" id="backHome">← Go back</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="giftScreen">
+      <div class="shell">
+        <div class="panel gift-zone">
+          <div class="mini">Correct answer confirmed ✅</div>
+          <h2>Okayyyy... you got it right 💘</h2>
+          <p class="sub" style="font-size:15px">A little celebration has been unlocked. Now comes the final mission:</p>
+          <div class="gift-wrap">
+            <div class="gift" id="gift" title="Click to open">
+              <div class="bow"></div>
+              <div class="lid"></div>
+              <div class="box"></div>
+              <div class="ribbon-v"></div>
+              <div class="ribbon-h"></div>
+            </div>
+          </div>
+          <div class="gift-card">🎁 Tap the gift box to open it 🎁</div>
+          <div class="reveal" id="reveal">
+            <div style="font-size:70px">😂🤣😂</div>
+            <h2 style="color:var(--hot)">APRIL FOOL!!!</h2>
+            <p class="sub" style="font-size:15px">Phuttuuuuuu, you passed the entire love quiz just to get pranked at the end. 💀💗</p>
+            <button class="primary" id="againBtn" style="margin-top:22px">Run the prank again 🔁</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="firework-zone" id="fireworks"></div>
+    <div class="confetti" id="confetti"></div>
+
+    <div class="modal-bg" id="cryModal">
+      <div class="modal" id="cryCard">
+        <div style="font-size:82px">😢🐻💧</div>
+        <div class="mini">WRONG ANSWER</div>
+        <h2 style="margin-bottom:12px">Bubu & Dudu are crying 😭</h2>
+        <p class="sub" style="font-size:14px">Rain?! Really?! You broke the tiny bear's heart.</p>
+        <button class="primary" id="cryReset" style="margin-top:18px">Take me back 💔</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const screens = {
+      access: document.getElementById('accessScreen'),
+      home: document.getElementById('homeScreen'),
+      choice: document.getElementById('choiceScreen'),
+      gift: document.getElementById('giftScreen')
+    };
+    const noBtn = document.getElementById('noBtn');
+    const loveActions = document.getElementById('loveActions');
+    const noHint = document.getElementById('noHint');
+    const fireworks = document.getElementById('fireworks');
+    const confetti = document.getElementById('confetti');
+    const cryModal = document.getElementById('cryModal');
+    const gift = document.getElementById('gift');
+    const reveal = document.getElementById('reveal');
+
+    function show(name) {
+      Object.values(screens).forEach(s => s.classList.remove('active'));
+      screens[name].classList.add('active');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function escapeText(v){ return String(v).replace(/[<>]/g,''); }
+
+    document.getElementById('enterBtn').addEventListener('click', () => {
+      // Fictional gate: any values are accepted locally; nothing is stored or transmitted.
+      show('home');
+    });
+    document.getElementById('code').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('enterBtn').click();
+    });
+
+    function moveNoButton() {
+      const rect = loveActions.getBoundingClientRect();
+      const b = noBtn.getBoundingClientRect();
+      const maxX = Math.max(12, rect.width - b.width - 10);
+      const x = Math.random() * maxX - (rect.width - b.width)/2 + 60;
+      const y = (Math.random() * 110) - 45;
+      noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${(Math.random()*10)-5}deg)`;
+      noHint.textContent = ['Almost! 😂','Nope, too slow.','Try again, Phuttuuuuuu. 😈','The button said NO to being clicked.'][Math.floor(Math.random()*4)];
+    }
+
+    ['mouseenter','pointerdown','touchstart','focus'].forEach(evt => noBtn.addEventListener(evt, (e) => {
+      e.preventDefault();
+      moveNoButton();
+    }, {passive:false}));
+    noBtn.addEventListener('click', e => { e.preventDefault(); moveNoButton(); });
+
+    document.getElementById('yesBtn').addEventListener('click', () => show('choice'));
+    document.getElementById('backHome').addEventListener('click', () => show('home'));
+
+    document.querySelectorAll('[data-choice]').forEach(btn => btn.addEventListener('click', () => {
+      if (btn.dataset.choice === 'rain') {
+        cryModal.classList.add('show');
+        document.getElementById('cryCard').classList.remove('shake');
+        void document.getElementById('cryCard').offsetWidth;
+        document.getElementById('cryCard').classList.add('shake');
+      } else {
+        show('gift');
+        makeFireworks();
+      }
+    }));
+
+    document.getElementById('cryReset').addEventListener('click', () => {
+      cryModal.classList.remove('show');
+      show('home');
+    });
+
+    function makeFireworks() {
+      fireworks.innerHTML = '';
+      const centers = [
+        [18,22],[50,16],[82,24],[28,48],[72,46],[50,70]
+      ];
+      centers.forEach(([cx,cy]) => {
+        for(let i=0;i<20;i++){
+          const dot = document.createElement('div');
+          dot.className='burst';
+          dot.style.left = cx + '%'; dot.style.top = cy + '%';
+          const a = (Math.PI*2*i)/20;
+          const r = 65 + Math.random()*65;
+          dot.style.setProperty('--x', Math.cos(a)*r+'px');
+          dot.style.setProperty('--y', Math.sin(a)*r+'px');
+          dot.style.background = `hsl(${320 + Math.random()*55}, 88%, ${65 + Math.random()*15}%)`;
+          dot.style.animationDelay = (Math.random()*.22)+'s';
+          fireworks.appendChild(dot);
+        }
+      });
+      setTimeout(()=>fireworks.innerHTML='', 1700);
+    }
+
+    gift.addEventListener('click', () => {
+      if (gift.classList.contains('open')) return;
+      gift.classList.add('open');
+      makeConfetti();
+      setTimeout(() => reveal.classList.add('show'), 520);
+    });
+
+    function makeConfetti(){
+      confetti.innerHTML='';
+      for(let i=0;i<80;i++){
+        const p=document.createElement('div');
+        p.className='piece';
+        p.style.left=Math.random()*100+'%';
+        p.style.top=(-10-Math.random()*15)+'%';
+        p.style.background=`hsl(${320 + Math.random()*50}, 88%, ${60 + Math.random()*20}%)`;
+        p.style.setProperty('--dx', ((Math.random()-.5)*180)+'px');
+        p.style.animationDelay=(Math.random()*.5)+'s';
+        p.style.transform=`rotate(${Math.random()*180}deg)`;
+        confetti.appendChild(p);
+      }
+      setTimeout(()=>confetti.innerHTML='', 3400);
+    }
+
+    document.getElementById('againBtn').addEventListener('click', () => {
+      gift.classList.remove('open');
+      reveal.classList.remove('show');
+      show('home');
+      moveNoButton();
+    });
+  </script>
+</body>
+</html>
